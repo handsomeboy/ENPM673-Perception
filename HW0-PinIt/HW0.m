@@ -1,12 +1,24 @@
-%   Name-Rohitkrishna Nambiar
-%   UID-115507944
-
+%   This code is for the HW0 for course ENPM673 - Perception 
+%   for autonomous robots. Kindly find the implementation details 
+%   in the README. 
+%   Author      -Rohitkrishna Nambiar
+%   UID         -115507944
+%   Email       -rohit517@terpmail.umd.edu
+%   Github      -https://github.com/rohit517
 
 clear all;
 clc;
-%   Read Image
-image = imread('TestImgResized.jpg');
 
+%   Read Image
+image = imread('Images/TestImgResized.jpg');
+
+%-----------------------------------------------------%
+%-----2.3.1 Denoise Image-----%
+
+%   This has been implemented using a median filter 
+%   that has been written in file medfilt2_custom
+
+%-----------------------------------------------------%
 %-----2.3.2 Find total number of coloured objects-----%
 
 %   Convert to HSV Color scale
@@ -25,7 +37,7 @@ cc = bwconncomp(imageBW);
 number  = cc.NumObjects;
 
 %   Print number of coloured pins
-fprintf('Total Number of Coloured Objects = %d \n', number);
+fprintf('Total Number of Coloured Objects = %d \n \n', number);
 
 %------------------------------------------------%
 %-----2.3.3 Find individual coloured objects-----%
@@ -63,7 +75,7 @@ end
 
 %   Filtering the binarized images for noise reduction
 for k = 1:nColors
-    binarized_images{k} = medfilt2(binarized_images{k});
+    binarized_images{k} = medfilt2_custom(binarized_images{k});
 end
 
 %   Regionprops also works

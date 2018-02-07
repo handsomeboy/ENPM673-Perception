@@ -1,6 +1,23 @@
+%   This code is for the HW0 for course ENPM673 - Perception 
+%   for autonomous robots. Kindly find the implementation details 
+%   in the README. 
+%   Author      -Rohitkrishna Nambiar
+%   UID         -115507944
+%   Email       -rohit517@terpmail.umd.edu
+%   Github      -https://github.com/rohit517
+
 function [pinColor] = getColor( pixelArea, segmented_images, nColors )
 %GETCOLOR Summary of this function goes here
 
+%   This function returns the color of pins given segmented images.
+
+%   -------Input Arguments-------
+%   1. pixelArea        - Pixel Area of each blob in a cluster after kmeans
+%   2. segmented_images - Cell containing segmented images
+%   3. nColors          - Total numbers of colors to be detected.
+
+%   -------Output Arguments-------
+%   1. pinColor         - Pin color in an cell of each color.
 
 %   Detailed explanation goes here
 
@@ -21,6 +38,7 @@ for i = 1:nColors
     greenValAvg = ceil(greenVal/pixelArea(i));
     blueValAvg = ceil(blueVal/pixelArea(i));
     
+    %   Uncommment following line for debug purposes.
     %fprintf('R = %d G = %d B = %d and area = %d \n', redValAvg, greenValAvg, blueValAvg, pixelArea(i));
     
     %   Color values will have to be hardcoded i guess at somestage. Either during initial 
