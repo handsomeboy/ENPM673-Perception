@@ -2,7 +2,7 @@
 %   HW1 - Lane Detection
 
 clc;
-clear all;
+%clear all;
 
 %   Variables and Flags
 enableUndistort = false;
@@ -14,6 +14,7 @@ videoFReader = vision.VideoFileReader('Dataset/project_video.mp4');
 videoPlayer = vision.VideoPlayer('Name', 'Video Player', 'Position',[300 100 1280 720]);
 videoPlayer1 = vision.VideoPlayer('Name', 'Video Player 1', 'Position',[300 100 1280 720]);
 videoPlayer2 = vision.VideoPlayer('Name', 'Video Player 1', 'Position',[300 100 1280 720]);
+v = VideoWriter('myFile.avi');
 
 testFrame = videoFReader.step();
 frameHeight = size(testFrame,1);
@@ -22,6 +23,8 @@ frameWidth = size(testFrame,2);
 maskImage = vertcat(zeros(frameHeight/2, frameWidth),ones(frameHeight/2, frameWidth)); 
 
 position = [50 50];
+open(v)
+
 
 % ------------------  Pipeline   --------------------- %
 
@@ -43,6 +46,7 @@ while ~isDone(videoFReader)
     %roiImageYellow = applyROI(binarizedImageYellow, false);
     roiImage = applyROI(binarizedImage, false);
     
+    %testimg = rgb2gray(undistortedImage);
     % Perspective Transform 
     transImage = transformImage(roiImage, false);
     
@@ -52,11 +56,15 @@ while ~isDone(videoFReader)
 
     [laneImage, leftLane, rightLane] = getLane(undistortedImage, roiImage, position, curve);
     
-    %imshow(binarizedImage);
-    %videoPlayer.step(leftLane);
-    %videoPlayer1.step(binarizedImageWhite);
+    %imshow(testimg);
+    %videoPlayer.step(roiImage);
+    %videoPlayer1.step(undistortedImage);
     videoPlayer2.step(laneImage);
+    I2 = im2double(laneImage);
+ 
+    writeVideo(v,laneImage);
 end
 
+close(v);
 release(videoPlayer);
 release(videoFReader);

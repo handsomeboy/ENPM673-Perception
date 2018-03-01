@@ -9,7 +9,7 @@ grayImage = medfilt2(grayImage);
 % Histogram Eq
 %grayImage = histeq(grayImage);
 
-whiteMask = grayImage > 0.90;
+whiteMask = grayImage > 0.80; %0.90 for project video
 
 end
 

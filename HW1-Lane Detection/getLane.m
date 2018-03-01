@@ -49,6 +49,14 @@ c2 = coefficients2 (2);
 %leftTopCorner = [580 440 6];
 %rightTopCorner = [700 440 6];
 
+if m1 == 0
+    m1 = 0.52;
+end
+
+if m2 == 0
+    m2 = 0.52;
+end
+
 y_bottom_intercept = 670;
 y_top_intercept = 460;
 
@@ -57,6 +65,11 @@ x_left_top_intercept = (y_top_intercept - c1)/m1;
 
 x_right_bottom_intercept = (y_bottom_intercept - c2)/m2;
 x_right_top_intercept = (y_top_intercept - c2)/m2;
+
+
+
+%fprintf('M1 = %f, M2 = %f \n', m1,m2);
+%fprintf('%d,%d,%d,%d',
 
 filledPoly = [x_left_bottom_intercept y_bottom_intercept x_left_top_intercept y_top_intercept x_right_top_intercept y_top_intercept x_right_bottom_intercept y_bottom_intercept];
 
