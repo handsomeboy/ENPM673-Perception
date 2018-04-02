@@ -45,7 +45,11 @@ give erroneous output. Therefore, RANSAC (Random Sample Consensus) is used for o
 This gives us a robust fundamental Matrix.
 
 The function prototype is:
+
+'''
 [Fbest, fMatrixInbuilt, inliersIndex] = estFundamentalMatrix([currentX currentY] ,[nextX nextY], matchedPointsCurrent, matchedPointsNext, 0.001);
+'''
+
 Function Name: estFundamentalMatrix
 
 Output: Fbest - Custom Fundamental Matrix Computation
@@ -61,14 +65,18 @@ The Essential Matrix is computed from the Fundamental Matrix and the Camera Intr
 This step gives us the possible rotation and translation matrices for a given essential matrix. We observe that we get 4 possible combinations of Rotations and Translation. This is stored in Tsolutions and Rsoutions.
 
 Function Prototype:
+'''
 [Tsolutions, Rsolutions, translateVector1, translateVector2, R1, R2] = getCameraPose(E);
+'''
 Function Name: getCameraPose
 
 Now we must extract the correct camera pose from the 4 possible options. This is done through triangulation. In this method, we reconstruct the 
 3D point and check is it is in front of both the cameras. We will only get one solution for which this holds true. 
 That is out Rotation and Translation.
 
+'''
 [Tactual, Ractual] = getCorrectPose(Tsolutions, Rsolutions, indexWithMetric(1:8,:), K);
+'''
 Function Name: getCorrectPose
 
 ### Step 5 - Output
