@@ -14,7 +14,7 @@ videoFReader = vision.VideoFileReader('Dataset/project_video.mp4');
 videoPlayer = vision.VideoPlayer('Name', 'Video Player', 'Position',[300 100 1280 720]);
 videoPlayer1 = vision.VideoPlayer('Name', 'Video Player 1', 'Position',[300 100 1280 720]);
 videoPlayer2 = vision.VideoPlayer('Name', 'Video Player 1', 'Position',[300 100 1280 720]);
-v = VideoWriter('myFile.avi');
+%v = VideoWriter('myFile.avi');
 
 testFrame = videoFReader.step();
 frameHeight = size(testFrame,1);
@@ -23,7 +23,7 @@ frameWidth = size(testFrame,2);
 maskImage = vertcat(zeros(frameHeight/2, frameWidth),ones(frameHeight/2, frameWidth)); 
 
 position = [50 50];
-open(v)
+%open(v)
 
 
 % ------------------  Pipeline   --------------------- %
@@ -33,7 +33,7 @@ while ~isDone(videoFReader)
     
     % Undistort the image using the camera matrix and distortion coefficient 
     if enableUndistort
-       undistortedImage = undistortimage(videoFrame, 1.6281e+03, 6.71627794e+02, 3.86046312e+02, -2.42565104e-01,-4.77893070e-02,-1.31388084e-03,-8.79107779e-05,2.20573263e-02);
+       %undistortedImage = undistortimage(videoFrame, 1.6281e+03, 6.71627794e+02, 3.86046312e+02, -2.42565104e-01,-4.77893070e-02,-1.31388084e-03,-8.79107779e-05,2.20573263e-02);
     else
        undistortedImage = videoFrame;
     end
@@ -57,14 +57,13 @@ while ~isDone(videoFReader)
     [laneImage, leftLane, rightLane] = getLane(undistortedImage, roiImage, position, curve);
     
     %imshow(testimg);
-    %videoPlayer.step(roiImage);
-    %videoPlayer1.step(undistortedImage);
+    %videoPlayer.step(laneImageCurve);
+    %videoPlayer1.step(leftLane);
     videoPlayer2.step(laneImage);
-    I2 = im2double(laneImage);
  
-    writeVideo(v,laneImage);
+    %writeVideo(v,laneImage);
 end
 
-close(v);
+%close(v);
 release(videoPlayer);
 release(videoFReader);
